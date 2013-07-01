@@ -10,7 +10,9 @@ angular.module('nag.expander', [
       priority: 1000,
       scope: {
         options: '=?nagExpander',
-        model: '=?'
+        model: '=?',
+        handleSelector: '@?',
+        contentSelector: '@?'
       },
       controller: [
         '$scope',
@@ -19,15 +21,15 @@ angular.module('nag.expander', [
 
           this.expand = function() {
             $scope.contentVisible = true;
-          }
+          };
 
           this.collapse = function() {
             $scope.contentVisible = false;
-          }
+          };
 
           this.toggle = function() {
             $scope.contentVisible = !$scope.contentVisible;
-          }
+          };
 
           Object.defineProperty(this, 'contentVisible', {
             get: function() {
@@ -36,15 +38,21 @@ angular.module('nag.expander', [
             set: function(value) {
               $scope.contentVisible = value;
             }
-          })
+          });
+
+          //for compatibility with the single panel directive
+          this.hide = this.collapse;
         }
       ],
       compile: function(element, attributes, transclude) {
-        element.addClass('nag-expander');
+        element.addClass('expander');
 
-        element.find('.handle').attr('ng-click', 'contentVisible = !contentVisible');
-        element.find('.handle').attr('ng-class', "{'is-active': contentVisible}");
-        element.find('.content').attr('ng-show', 'contentVisible');
+        var handleSelector = attributes.handleSelector || '> .handle';
+        var contentSelector = attributes.contentSelector || '> .content';
+
+        element.find(handleSelector).attr('ng-click', 'contentVisible = !contentVisible');
+        element.find(handleSelector).attr('ng-class', "{'is-active': contentVisible}");
+        element.find(contentSelector).attr('ng-show', 'contentVisible');
 
         return function(scope, element, attributes) {
           scope.options = nagDefaults.getExpanderOptions(scope.options);
