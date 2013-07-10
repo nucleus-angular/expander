@@ -1,18 +1,16 @@
-angular.module('nag.expander', [
-  'nag.core'
-])
+angular.module('nag.expander', [])
 .directive('nagExpander', [
   '$timeout',
-  'nagDefaults',
-  function($timeout, nagDefaults){
+  '$rootScope',
+  function($timeout, $rootScope){
     return {
       restrict: 'A',
       priority: 1000,
       scope: {
-        options: '=?nagExpander',
         model: '=?',
         handleSelector: '@?',
-        contentSelector: '@?'
+        contentSelector: '@?',
+        style: '@?'
       },
       controller: [
         '$scope',
@@ -52,16 +50,17 @@ angular.module('nag.expander', [
 
         element.find(handleSelector).attr('ng-click', 'contentVisible = !contentVisible');
         element.find(handleSelector).attr('ng-class', "{'is-active': contentVisible}");
-        element.find(contentSelector).attr('ng-show', 'contentVisible');
+        element.find(contentSelector).attr('ng-class', "{'is-active': contentVisible}");
+
+        if(attributes.animate !== 'true') {
+          element.find(contentSelector).attr('ng-show', 'contentVisible');
+        }
 
         return function(scope, element, attributes) {
-          scope.options = nagDefaults.getExpanderOptions(scope.options);
+          if(attributes.style) {
+            element.addClass(attributes.style);
 
-          if(scope.options.style) {
-            element.addClass(scope.options.style);
-
-            if(scope.options.style === 'button-drop-down') {
-
+            if(attributes.style === 'button-drop-down') {
               var copyingClasses = [
                 'small',
                 'large',
@@ -78,6 +77,12 @@ angular.module('nag.expander', [
                 }
               }
             }
+          }
+
+          if(attributes.broadcast) {
+            scope.$watch('contentVisible', function(newValue, oldValue) {
+              $rootScope.$broadcast('expander-' + attributes.broadcast + '::state-change', newValue);
+            });
           }
 
           scope.contentVisible = false;
