@@ -96,10 +96,6 @@ angular.module('nag.expander', [])
         element.find(handleSelector).attr('ng-class', "{'is-active': contentVisible}");
         element.find(contentSelector).attr('ng-class', "{'is-active': contentVisible}");
 
-        if(attributes.animate !== 'true') {
-          element.find(contentSelector).attr('ng-show', 'contentVisible');
-        }
-
         return function(scope, element, attributes) {
           if(attributes.style) {
             element.addClass(attributes.style);
