@@ -80,13 +80,6 @@ angular.module('nag.expander', [])
         }
       ],
       compile: function(element, attributes, transclude) {
-        /**
-         * Options
-         *
-         * @ngscope
-         * @property options
-         * @type {object}
-         */
         element.addClass('expander');
 
         var handleSelector = attributes.handleSelector || '> .handle';
@@ -123,6 +116,7 @@ angular.module('nag.expander', [])
            * Event triggered when the visibility changes, uses the value of the data-broadcast HTML attribute to generate the event string
            *
            * @event expander-[data-broadcast]::state-change
+           * @eventlevel root
            */
           if(attributes.broadcast) {
             scope.$watch('contentVisible', function(newValue, oldValue) {
