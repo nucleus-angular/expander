@@ -1,8 +1,38 @@
 /**
- * Component to allow you to easily hide/show collapsible data
+ * # Expander
+ *
+ * The expander directive allows you to create content that can show and handle when clicking on a handle.
+ *
+ * By defualt you need to provide an element with the class of handle and class of content:
+ *
+ * ```html
+ * <div nag-exapnder>
+ *   <div class="handle">handle</div>
+ *   <div class="content">content</div>
+ * </div>
+ * ```
+ *
+ * The element with the class of handle will have the mouseup event attached to it which will toggle the display of the element with content.
+ *
+ * If for whatever reason you can use handle/content classes, you can use whatever css valid selector you want and give that to the nag-expander element and handle-selector and content-selector html attributes.  The selectors will be performs with the main element as the root element so the selector should be relative to the nag-expander element:
+ *
+ * ```html
+ * <div nag-exapnder handle-selector="> div:nth-child(1)" content-selector="> div:nth-child(2)">
+ *   <div>handle</div>
+ *   <div>content</div>
+ * </div>
+ * ```
  *
  * @module nag.expander
  * @ngdirective nagExpander
+ *
+ * @nghtmlattribute {null} nag-expander Just indicates this element is an expander
+ * @nghtmlattribute {object} [model] Scope object to be available inside this directive
+ * @nghtmlattribute {string} [handle-selector="> .handle"] CSS selector to use to get handle element (relative to this element)
+ * @nghtmlattribute {string} [content-selector="> .content"] CSS selector to use to get content element (relative to this element)
+ * @nghtmlattribute {string} [style] A stype to use for the expander supports:
+ *
+ * - button-drop-down
  */
 angular.module('nag.expander', [])
 .directive('nagExpander', [
