@@ -41,13 +41,13 @@ angular.module('nag.expander', [])
   function($timeout, $rootScope){
     return {
       restrict: 'A',
-      priority: 1000,
-      scope: {
+      priority: 398,
+      /*scope: {
         model: '=?',
         handleSelector: '@?',
         contentSelector: '@?',
         style: '@?'
-      },
+      },*/
       controller: [
         '$scope',
         function($scope) {
