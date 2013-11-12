@@ -34,20 +34,24 @@
  *
  * - button-drop-down
  */
-angular.module('nag.expander', [])
+angular.module('nag.expander', [
+  'nag.core'
+])
 .directive('nagExpander', [
   '$timeout',
   '$rootScope',
-  function($timeout, $rootScope){
+  'nagHelper',
+  function($timeout, $rootScope, nagHelper){
     return {
       restrict: 'A',
       priority: 398,
-      /*scope: {
+      templateUrl: nagHelper.templateUrl,
+      scope: {
         model: '=?',
         handleSelector: '@?',
         contentSelector: '@?',
         style: '@?'
-      },*/
+      },
       controller: [
         '$scope',
         function($scope) {
