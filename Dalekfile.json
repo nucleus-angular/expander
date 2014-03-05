@@ -1,0 +1,8 @@
+{
+  "tests": [
+    "dalek/expander.js"
+  ],
+  "browser": [
+    "chrome"
+  ]
+}
