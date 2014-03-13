@@ -34,9 +34,7 @@
  *
  * - button-drop-down
  */
-angular.module('nag.expander', [
-  'nag.core'
-])
+angular.module('nag.expander')
 .directive('nagExpander', [
   '$timeout',
   '$rootScope',
