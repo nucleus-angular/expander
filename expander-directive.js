@@ -133,7 +133,8 @@ angular.module('nag.expander')
                 'split',
                 'shadow',
                 'border',
-                'square'
+                'square',
+                'not-positioned'
               ];
 
               for(var x = 0; x <= copyingClasses.length; x += 1) {
