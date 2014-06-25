@@ -109,6 +109,7 @@ angular.module('nag.expander')
            * @method hide
            */
           this.hide = this.collapse;
+          this.show = this.expand;
         }
       ],
       compile: function(element, attributes, transclude) {
