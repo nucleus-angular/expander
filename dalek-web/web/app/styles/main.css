@@ -1,6 +1,6 @@
+.expander.is-active .content,
+.expander.is-active .custom-content {
+  display: inline-block; }
 .expander .content,
 .expander .custom-content {
   display: none; }
-  .expander .content.is-active,
-  .expander .custom-content.is-active {
-    display: inline-block; }

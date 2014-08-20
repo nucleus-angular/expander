@@ -119,8 +119,6 @@ angular.module('nag.expander')
         var contentSelector = attributes.contentSelector || '> .content';
 
         element.find(handleSelector).attr('ng-mouseup', 'contentVisible = !contentVisible');
-        element.find(handleSelector).attr('ng-class', "{'is-active': contentVisible}");
-        element.find(contentSelector).attr('ng-class', "{'is-active': contentVisible}");
 
         return function(scope, element, attributes) {
           if(attributes.style) {
@@ -169,6 +167,14 @@ angular.module('nag.expander')
 
           //$timeout used in case the data attribute is added dynamically (like with the nucleus angular attribute directive
           $timeout(function(){scope.contentVisible = $(element).data('default-expand')}, 0);
+
+          scope.$watch('contentVisible', function(newValue) {
+            if(newValue === true) {
+              element.addClass('is-active');
+            } else {
+              element.removeClass('is-active');
+            }
+          })
         }
       }
     };
