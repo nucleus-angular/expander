@@ -27,7 +27,6 @@
  * @ngdirective nagExpander
  *
  * @nghtmlattribute {null} nag-expander Just indicates this element is an expander
- * @nghtmlattribute {object} [model] Scope object to be available inside this directive
  * @nghtmlattribute {string} [handle-selector="> .handle"] CSS selector to use to get handle element (relative to this element)
  * @nghtmlattribute {string} [content-selector="> .content"] CSS selector to use to get content element (relative to this element)
  * @nghtmlattribute {string} [style] A stype to use for the expander supports:
@@ -43,75 +42,8 @@ angular.module('nag.expander')
     return {
       restrict: 'A',
       priority: 398,
-      templateUrl: nagHelper.templateUrl,
-      scope: {
-        model: '=?',
-        handleSelector: '@?',
-        contentSelector: '@?',
-        style: '@?'
-      },
-      controller: [
-        '$scope',
-        function($scope) {
-          $scope.contentVisible = false;
-
-          /**
-           * Expand the element
-           *
-           * @ngdirectivecontroller
-           * @method expand
-           */
-          this.expand = function() {
-            $scope.contentVisible = true;
-          };
-
-          /**
-           * Collapse the element
-           *
-           * @ngdirectivecontroller
-           * @method collapse
-           */
-          this.collapse = function() {
-            $scope.contentVisible = false;
-          };
-
-          /**
-           * Switch the state of the element
-           *
-           * @ngdirectivecontroller
-           * @method toggle
-           */
-          this.toggle = function() {
-            $scope.contentVisible = !$scope.contentVisible;
-          };
-
-          /**
-           * Whether or not the element's content is visible
-           *
-           * @ngdirectivecontroller
-           * @property contentVisible
-           * @type {boolean}
-           */
-          Object.defineProperty(this, 'contentVisible', {
-            get: function() {
-              return $scope.contentVisible;
-            },
-            set: function(value) {
-              $scope.contentVisible = value;
-            }
-          });
-
-          //for compatibility with the single panel directive
-          /**
-           * Adds compatibility with the single panel directive by alias .hide() to .collapse
-           *
-           * @ngdirectivecontroller
-           * @method hide
-           */
-          this.hide = this.collapse;
-          this.show = this.expand;
-        }
-      ],
+      template: nagHelper.template,
+      scope: true,
       compile: function(element, attributes, transclude) {
         element.addClass('expander');
 
