@@ -1,4 +1,4 @@
-angular.module('nag.extendText')
+angular.module('nag.expander')
 .controller('NagExpanderDCtrl', [
   '$scope',
   function($scope) {
