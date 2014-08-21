@@ -43,6 +43,7 @@ angular.module('nag.expander')
       restrict: 'A',
       priority: 398,
       template: nagHelper.template,
+      controller: 'NagExpanderDCtrl',
       scope: true,
       compile: function(element, attributes, transclude) {
         element.addClass('expander');
