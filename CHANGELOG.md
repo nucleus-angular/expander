@@ -2,7 +2,7 @@
 
 Each change log are assumed to be accompanied by associated unit test and documentation updates.
 
-## master
+## 0.6.0
 
 - added .editorconfig file
 - added `show()` method to controller in order to support change to the single panel directive
